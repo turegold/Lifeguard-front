@@ -1,28 +1,40 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    proxy: {
-      '/api': {
-        target: 'https://tower-chief-visual-attachments.trycloudflare.com',
-        changeOrigin: true,
-        secure: true,
-        rewrite: (path) => path, // 경로를 그대로 유지
-        configure: (proxy, _options) => {
-          proxy.on('error', (err, _req, _res) => {
-            console.log('proxy error', err);
-          });
-          proxy.on('proxyReq', (proxyReq, req, _res) => {
-            console.log('Sending Request to the Target:', req.method, req.url);
-          });
-          proxy.on('proxyRes', (proxyRes, req, _res) => {
-            console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
-          });
+export default defineConfig(({ mode }) => {
+  // mode: development | production
+  const env = loadEnv(mode, process.cwd())
+
+  return {
+    plugins: [react()],
+    server: {
+      proxy: {
+        '/api': {
+          target: env.VITE_API_BASE_URL,
+          changeOrigin: true,
+          secure: true,
+          rewrite: (path) => path,
+          configure: (proxy, _options) => {
+            proxy.on('error', (err, _req, _res) => {
+              console.log('proxy error', err)
+            })
+            proxy.on('proxyReq', (proxyReq, req, _res) => {
+              console.log(
+                'Sending Request to the Target:',
+                req.method,
+                req.url
+              )
+            })
+            proxy.on('proxyRes', (proxyRes, req, _res) => {
+              console.log(
+                'Received Response from the Target:',
+                proxyRes.statusCode,
+                req.url
+              )
+            })
+          },
         },
       },
     },
-  },
+  }
 })
