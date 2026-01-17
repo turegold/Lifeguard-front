@@ -34,7 +34,6 @@ export default function EmergencyGuide({
     useState<HospitalRecommendationResponse | null>(null);
   const [isLoadingHospitals, setIsLoadingHospitals] = useState(false);
   const [hospitalError, setHospitalError] = useState<string | null>(null);
-  const [isExplanationExpanded, setIsExplanationExpanded] = useState(false);
 
   // 병원 추천 API 호출
   useEffect(() => {
