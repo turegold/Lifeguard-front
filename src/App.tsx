@@ -48,21 +48,7 @@ function App() {
         console.log("저장 위치: App 컴포넌트의 selectedLocation 상태");
         console.log("위도:", location.latitude, "경도:", location.longitude);
 
-        // 백엔드 API 호출 (필요시 주석 해제하고 엔드포인트 수정)
-        // try {
-        //   const response = await fetch('/api/save-location', {
-        //     method: 'POST',
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(location),
-        //   });
-        //   if (response.ok) {
-        //     console.log('백엔드에 위치 정보 전송 완료');
-        //   }
-        // } catch (err) {
-        //   console.error('백엔드 전송 실패:', err);
-        // }
+
       },
       (error) => {
         console.error("자동 위치 가져오기 실패:", error);
@@ -178,11 +164,10 @@ function App() {
               <button
                 key={index}
                 onClick={() => handleQuickSymptomClick(symptomText)}
-                className={`px-4 py-3 border rounded-lg text-left transition-all ${
-                  selectedQuickSymptom === symptomText
-                    ? "border-indigo-500 bg-indigo-50 text-indigo-700"
-                    : "border-gray-200 bg-white text-gray-800 hover:border-gray-300 hover:bg-gray-50"
-                }`}
+                className={`px-4 py-3 border rounded-lg text-left transition-all ${selectedQuickSymptom === symptomText
+                  ? "border-indigo-500 bg-indigo-50 text-indigo-700"
+                  : "border-gray-200 bg-white text-gray-800 hover:border-gray-300 hover:bg-gray-50"
+                  }`}
               >
                 {symptomText}
               </button>
@@ -194,13 +179,12 @@ function App() {
         <button
           onClick={handleOpenGuide}
           disabled={isLoadingGuidance}
-          className={`w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-4 rounded-lg transition-colors ${
-            isLoadingGuidance ? "opacity-50 cursor-not-allowed" : ""
-          }`}
+          className={`w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-4 rounded-lg transition-colors ${isLoadingGuidance ? "opacity-50 cursor-not-allowed" : ""
+            }`}
         >
           {isLoadingGuidance
-            ? "응급 가이드 불러오는 중..."
-            : "응급 가이드 보기"}
+            ? "환자에게 맞는 병원 불러오는 중..."
+            : "환자에게 맞는 병원을 불러오기"}
         </button>
       </main>
     </div>

@@ -121,7 +121,7 @@ export default function EmergencyGuide({
               <h2 className="text-white font-bold text-xl">즉시 해야 할 일</h2>
             </div>
             {guidance?.immediate_actions &&
-            guidance.immediate_actions.length > 0 ? (
+              guidance.immediate_actions.length > 0 ? (
               <ul className="space-y-2">
                 {guidance.immediate_actions.map((action, index) => (
                   <li
@@ -222,76 +222,9 @@ export default function EmergencyGuide({
           <div className="bg-blue-500 rounded-t-3xl px-4 pt-6 pb-4 mb-4">
             <h1 className="text-2xl font-bold text-white mb-1">추천 병원</h1>
             <p className="text-white text-sm opacity-90">
-              가까운 거리 순으로 추천합니다
+              환자의 상태와 병원의 상황을 분석하여 병원을 추천합니다.
             </p>
           </div>
-
-          {/* 병원 추천 기준 보기 (토글) */}
-          {hospitalRecommendations?.ranking_explanation && (
-            <div className="bg-white rounded-lg mb-4 shadow-sm overflow-hidden">
-              <button
-                onClick={() => setIsExplanationExpanded(!isExplanationExpanded)}
-                className="w-full p-4 flex items-center justify-between hover:bg-gray-50 transition-colors"
-              >
-                <span className="text-gray-800 font-medium">
-                  병원 추천 기준 보기
-                </span>
-                <svg
-                  className={`w-5 h-5 text-gray-400 transition-transform ${
-                    isExplanationExpanded ? "rotate-180" : ""
-                  }`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-              {isExplanationExpanded && (
-                <div className="px-4 pb-4 border-t border-gray-100">
-                  <div className="pt-4 space-y-3">
-                    <div>
-                      <h4 className="text-sm font-bold text-gray-800 mb-2">
-                        추천 요약
-                      </h4>
-                      <p className="text-sm text-gray-700 leading-relaxed">
-                        {hospitalRecommendations.ranking_explanation.summary}
-                      </p>
-                    </div>
-                    {hospitalRecommendations.ranking_explanation.details &&
-                      hospitalRecommendations.ranking_explanation.details
-                        .length > 0 && (
-                        <div>
-                          <h4 className="text-sm font-bold text-gray-800 mb-2">
-                            상세 설명
-                          </h4>
-                          <ul className="space-y-2">
-                            {hospitalRecommendations.ranking_explanation.details.map(
-                              (detail, index) => (
-                                <li
-                                  key={index}
-                                  className="text-sm text-gray-700 flex items-start gap-2"
-                                >
-                                  <span className="text-indigo-500 font-bold">
-                                    •
-                                  </span>
-                                  <span>{detail}</span>
-                                </li>
-                              )
-                            )}
-                          </ul>
-                        </div>
-                      )}
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
 
           {/* 로딩 상태 */}
           {isLoadingHospitals && (
@@ -358,9 +291,8 @@ export default function EmergencyGuide({
                   >
                     <span className="text-sm font-medium">상세 정보</span>
                     <svg
-                      className={`w-5 h-5 transition-transform ${
-                        expandedHospital === hospital.rank ? "rotate-180" : ""
-                      }`}
+                      className={`w-5 h-5 transition-transform ${expandedHospital === hospital.rank ? "rotate-180" : ""
+                        }`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -428,11 +360,10 @@ export default function EmergencyGuide({
                                     stroke="#3b82f6"
                                     strokeWidth="6"
                                     fill="none"
-                                    strokeDasharray={`${
-                                      (hospital.er_beds /
-                                        Math.max(hospital.total_er_beds, 1)) *
+                                    strokeDasharray={`${(hospital.er_beds /
+                                      Math.max(hospital.total_er_beds, 1)) *
                                       226.2
-                                    } 226.2`}
+                                      } 226.2`}
                                     className="transition-all"
                                   />
                                 </svg>
@@ -469,11 +400,10 @@ export default function EmergencyGuide({
                                     stroke="#10b981"
                                     strokeWidth="6"
                                     fill="none"
-                                    strokeDasharray={`${
-                                      (hospital.icu_beds /
-                                        Math.max(hospital.total_icu_beds, 1)) *
+                                    strokeDasharray={`${(hospital.icu_beds /
+                                      Math.max(hospital.total_icu_beds, 1)) *
                                       226.2
-                                    } 226.2`}
+                                      } 226.2`}
                                     className="transition-all"
                                   />
                                 </svg>
@@ -511,14 +441,13 @@ export default function EmergencyGuide({
                                       stroke="#ef4444"
                                       strokeWidth="6"
                                       fill="none"
-                                      strokeDasharray={`${
-                                        (hospital.trauma_icu_beds /
-                                          Math.max(
-                                            hospital.total_icu_beds,
-                                            1
-                                          )) *
+                                      strokeDasharray={`${(hospital.trauma_icu_beds /
+                                        Math.max(
+                                          hospital.total_icu_beds,
+                                          1
+                                        )) *
                                         226.2
-                                      } 226.2`}
+                                        } 226.2`}
                                       className="transition-all"
                                     />
                                   </svg>
@@ -550,11 +479,10 @@ export default function EmergencyGuide({
                                 CT 가능
                               </span>
                               <span
-                                className={`text-sm font-semibold ${
-                                  hospital.ct_available
-                                    ? "text-green-600"
-                                    : "text-red-600"
-                                }`}
+                                className={`text-sm font-semibold ${hospital.ct_available
+                                  ? "text-green-600"
+                                  : "text-red-600"
+                                  }`}
                               >
                                 {hospital.ct_available ? "✓ 가능" : "✗ 불가능"}
                               </span>
@@ -564,11 +492,10 @@ export default function EmergencyGuide({
                                 인공호흡기
                               </span>
                               <span
-                                className={`text-sm font-semibold ${
-                                  hospital.ventilator_available
-                                    ? "text-green-600"
-                                    : "text-red-600"
-                                }`}
+                                className={`text-sm font-semibold ${hospital.ventilator_available
+                                  ? "text-green-600"
+                                  : "text-red-600"
+                                  }`}
                               >
                                 {hospital.ventilator_available
                                   ? "✓ 가능"
